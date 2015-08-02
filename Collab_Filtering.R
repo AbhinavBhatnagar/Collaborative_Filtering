@@ -50,22 +50,15 @@ get_Score <- function(history, similarities)
   x
 }
 
-# A placeholder matrix
 mat <- matrix(NA, nrow=nrow(data),ncol=ncol(data)-1,dimnames=list((data$user),colnames(data[-1])))
 
-# Loop through the users (rows)
 for(i in 1:nrow(mat)) 
 {
-  # Loops through the products (columns)
   for(j in 1:ncol(mat)) 
   {
-    # Get the user's name and th product's name
-    # We do this not to conform with vectors sorted differently 
     user <- rownames(mat)[i]
     product <- colnames(mat)[j]
-    
-    # We do not want to recommend products you have already consumed
-    # If you have already consumed it, we store an empty string
+    # We are not recommending products you have already consumed
     if(as.integer(data[data$user==user,product]) == 1)
     { 
       mat[i,j]<-""
